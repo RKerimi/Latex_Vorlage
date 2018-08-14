@@ -1,0 +1,14 @@
+\chapter{Fazit}
+\thispagestyle{standard}
+\pagestyle{standard}
+\renewcommand{\footrulewidth}{0.4pt}
+\lfoot{\small Markus Haas, Refik Kerimi}
+
+Der in dieser Arbeit entworfene \acl{PA} verbessert die Kommunikation zwischen OpenNES und Legacy Geräten.
+Mit Hilfe des in Punkt \ref{chap:Funktionstest} beschriebenen Testszenarios wurde überprüft, ob der Adapter die in den Anforderungen spezifizierten Funktionen erfüllt.
+Die Anforderungen werden erfüllt und er kann SunSpec Datenpunkte lesen und schreiben. 
+Sollte es notwendig sein weitere Modelle zu implementieren, z.B.: andere als die von SunSpec definierten Datentypen, ist dies problemlos möglich. Die Grundfunktionen des Adapters sind vorhanden und müssen gegebenenfalls nur angepasst werden.\\
+
+Ein möglicher nächster Schritt, wäre es einen Modbus RTU Protokolladapter zu entwickeln. Wie in der Arbeit beschrieben, unterscheiden sich Modbus TCP und RTU prinzipiell nur durch das Übertragungsprotokoll. Die bereits für Modbus TCP verwendete Library Modbus4j unterstützt laut Dokumentation auch Modbus RTU.
+Weiters ist uns bei der Implementierung des Adapters und beim Durcharbeiten des Modbus Standards aufgefallen, dass das Modbus Protokoll keine Security Mechanismen eingebaut hat. Ein Modbus Client muss sich nicht beim Server authentifizieren bzw. benötigt keine Freigabe vom Server, um Daten zu lesen oder zu schreiben. Sobald sich also ein Client im selben Netzwerk wie der Server befindet, hat der Client vollen Zugriff auf den Server. Hierfür sei auf \upshape \cite{fovino2009design} verwiesen, wo die Erstellung eines Sicheren Modbus Protokolls behandelt wird.
+Zusammenfassend kann gesagt werden, dass der \acl{PA} eine relativ einfache \acl{IKT}-Lösung zur Einbindung von Standard Geräten in das OpenNES System ist. 

@@ -1,0 +1,224 @@
+\chapter{Implementierung}\label{chap:Implementierung}
+\thispagestyle{standard}
+\pagestyle{standard}
+\lfoot{\small Markus Haas}
+
+\section{Umsetzung}\label{sub: Umsetzung}
+In diesem Kapitel wird die Umsetzung der Funktionen (Messaging Muster) des Protokolladapters beschrieben. Die Funktionscodes seitens Modbus funktionieren wie bereits in Kapitel \ref{sec:Funktionscodes} beschrieben nach dem  Request-Response Prinzip. Es wird ein Funktionscode an den Server gesendet und dieser oder ein Exceptioncode wird vom Client wieder empfangen. Die Funktionen des Protokolladapters befinden sich eine Ebene darüber. D.h. die Funktionscodes des Modbus Protokolls werden so genutzt dass das geforderte Messaging Muster dabei erfüllt wird. Ebenfalls werden in diesem Kapitel die einzelnen Klassen, die erstellt wurden, beschrieben.
+
+\section{Ausgewählte Programmiersprache und IDE}
+Die Entwicklung des Protokolladapters erfolgte in der Programmiersprache Java. Als Entwicklungsumgebung wurde Eclipse Jee Neon (4.6.2) verwendet. Um das Modbus Protokoll zu implementieren wurde die Library Modbus4j\footnote{\url{https://github.com/infiniteautomation/modbus4j}} gewählt. Dazu wurde ein neues Maven Projekt angelegt. Als Laufzeitumgebung ist die Version jre1.8.0 verwendet worden. 
+
+\section{SunSpecDataType}
+Der Enum Typ \textit{SunSpecDataType} ist notwendig um den Wert, welcher von einem Modbus Server gelesen wird, in einen Java Datentyp bzw. Objekt umzuwandeln. Das Listing \ref{lst:SunSpecDataType} zeigt die möglichen Datentypen.
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={SunSpecDataType},label=lst:SunSpecDataType, xleftmargin=50pt]
+public enum SunSpecDataType {
+	SHORT,
+	INT,
+	LONG,
+	FLOAT,
+	STRING
+}
+\end{lstlisting}
+
+
+\section{Status}
+\label{sec:Status}
+Der Enum Typ \grqq{}Status\grqq{} listet die möglichen Meldungen auf, welche eine Funktion des Adapters zurückgeben kann. Da zwischen den Modulen und den Connectivity Modul ein Datenaustausch stattfindet, der unabhängig vom verwendeten Protokolladapter ist, wird der Status generisch gehalten. Es ist nicht notwendig, dabei die einzelnen spezifischen Exceptions auszugeben. Prinzipiell ist es wichtig zu wissen, ob die Transaktion erfolgreich war. War diese nicht erfolgreich, benötigen die Module, welche über das Connectivity Modul senden und empfangen keine Modbus Exception, da diese nicht wissen über welchen Protokolladapter kommuniziert wird. Listing \ref{lst:Status} gibt einen Überblick der Status.
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Status},label=lst:Status, xleftmargin=50pt]
+public enum Status {
+	Nothing,
+	Error,
+	WertGeschrieben,
+	WertEmpfangen,
+	KeineVerbindungsparameter,
+	KeinGueltigerDatentyp
+}
+\end{lstlisting}
+
+
+
+\section{Remoteaddress}
+Wie bereits beschrieben, empfängt das Connectivity Module eine generische Adresse. Diese wird vom Connectivity Module in die Remoteaddress für Modbus umgesetzt. Tabelle \ref{tab:Remoteaddress} zeigt die Auflistung der Parameter, aus denen die Remoteaddress besteht. Die Remoteaddresse besteht immer aus den 4 Parametern. Als Trennzeichen wird ein Doppelpunkt verwendet. Dies wird im Listing \ref{lst:Remoteaddress} schematisch dargestellt.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Parameter       & Beschreibung                                                                                                            & Wertebereich      \\ \hline
+		IPV4Adresse     & Die IP Adresse des Modbus Server                                                                                         & lt. Netzwerk      \\ \hline
+		SlaveID         & Die Slave ID des Modbus Servers                                                                                           & 1-247             \\ \hline
+		Registeradresse & \begin{tabular}[c]{@{}l@{}}Die Registeradresse aus welcher ein\\ Wert gelesen bzw. geschrieben werden soll\end{tabular} & 0-65535           \\ \hline
+		SunSpecDatentyp & \begin{tabular}[c]{@{}l@{}}SunSpec Datentyp des Werts welcher\\ gelesen bzw. geschrieben werden soll\end{tabular}       &  \\ \hline
+	\end{tabular}
+	\caption{Komponenten der Remoteaddress}
+	\label{tab:Remoteaddress}
+\end{table}
+
+\clearpage
+
+
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Zusammensetzung Remoteaddress},label=lst:Remoteaddress, xleftmargin=50pt]
+String Remoteaddress = "IpV4Adresse:SlaveId:Registeradresse:SunSpecDatentyp"
+\end{lstlisting}
+
+Der SunSpec Datentyp, welcher mit der \textit{Remoteaddress} übergeben wird, ist folgendermaßen aufgebaut: \textit{Datentyp|Länge}. Das Zeichen \textit{|} ist hier im Text zur besseren Darstellung eingefügt worden. Die Länge ist bei primitiven Datentypen die Bitanzahl. Bei einem String ist dies die Zeichenanzahl. Da ein Holding Register immer 2 Zeichen enthält, wird die Länge welche dem String mitgegeben wird immer auf die nächsthöhere gerade Zahl aufgerundet, wenn ungerade. Die gerade Zahl dividiert durch zwei ergibt die benötigte Registeranzahl für den String. Folgende Aufzählung zeigt eine Übersicht der SunSpec Datentypen, die implementiert worden sind:
+
+\begin{itemize}
+%\setlength{\parskip}{1pt}
+    \item int16
+    \item uint16
+    \item acc16
+    \item enum16
+    \item bitfield16
+    \item pad16
+    \item int32
+    \item uint32
+    \item acc32
+    \item bitfield32
+    \item int64
+    \item acc64
+    \item float32
+    \item sunssf
+    \item stringx: wobei 2 <= x <= 250 
+\end{itemize}
+
+\clearpage
+
+\section{Dataobject}
+\label{sec:Dataobject}
+In diesem Kapitel wird jenes Objekt beschrieben welches die Daten enthält, die von einem Server ausgelesen werden. Das Datenobjekt ist wie in Listing \ref{lst:Dataobject} beschrieben aufgebaut. Es besteht aus einem Objekt mit dem Namen \grqq{}data\grqq{} und einem \verb|SunSpecDataType| Objekt mit dem Namen datatype. In data sind die Daten welche zurückgegeben werden enthalten. Das Objekt datatype enthält den Datentyp welchen die Daten im Objekt data haben. Somit ist für die Klasse welche das Dataobject als Rückgabe erhält sichergestellt das die Daten in einen Java konformem Datentyp umgewandelt werden können. 
+
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Dataobject},label=lst:Dataobject, xleftmargin=50pt]
+public class DataObject {
+	Object data;
+	SunSpecDataType datatype;
+
+	public DataObject() {
+		this.data = new Object();
+	}
+}
+\end{lstlisting}
+
+
+\section{Result}
+Result ist ein Objekt, welches aus Dataobject \ref{sec:Dataobject} und Status \ref{sec:Status} besteht. Dieses Objekt wird für die Methode request die im Abschnitt \ref{sec:RequRespFunction} beschreiben ist, benötigt. Listing \ref{lst:Result} zeigt den Aufbau von Result. 
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Result},label=lst:Result, xleftmargin=50pt]
+public class Result {
+	DataObject data;
+	Status status;
+	
+	public Result() {
+		this.data = new DataObject();
+	}
+}
+\end{lstlisting}
+
+
+\section{ModbusTCPAdapter}
+Die Messaging Funktionen des Adapters sind in ModbusTCPAdapter als Methodenaufrufe realisiert. Die Klasse ist als Singleton implementiert. Die Entscheidung, den Adapter als Singleton auszuführen wurde unter dem Gesichtspunkt getroffen, dass es bei mehreren Adapter Objekten zur Überschneidung von Modbus Transaktionen kommen kann. Durch die Implementierung als Singleton wurde dies schon im Vorhinein ausgeschlossen. Somit kann das Connectivity Modul genau einen ModbusTCP Adapter besitzen. Mit der Methode ModbusTCPAdapter.getInstanz() wird diese instanziiert bzw. gibt die Instanz zurück wenn bereits instanziiert.  
+
+\subsection{Grundeinstellungen}
+In der ModbusTCPAdapter Klasse werden die Grundeinstellungen des Adapters getroffen. Diese sind in Tabelle \ref{tab:BasissettingsModbusTCPAdapter} dargestellt. Die Variablen sind vom Attribut private. Daher werden Getter und Setter Methoden für diese Variablen bereitgestellt. 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Variablenname & Datentyp & Standardwert & Beschreibung                                                                                                                                                                        \\ \hline
+TCPport       & int      & 502          & TCP Port des Modbus Servers                                                                                                                                                         \\ \hline
+Timeout       & int      & 100          & \begin{tabular}[c]{@{}l@{}}Timeout einer Modbus Transaktion \\ in Millisekunden. Innerhalb dieser \\ Zeit muss die Antwort des Modbus \\ Servers am Client eintreffen.\end{tabular} \\ \hline
+retries       & int      & 1            & \begin{tabular}[c]{@{}l@{}}Anzahl der Versuche einer Modbus \\ Transaktion.\end{tabular}                                                                                            \\ \hline
+refresh       & long     & 1000         & \begin{tabular}[c]{@{}l@{}}Wird benötigt für das Polling bei \\ Publish-Subscribe. \\ Einheit in Millisekunden.\end{tabular}                                                        \\ \hline
+\end{tabular}
+\caption{Grundeinstellungen Modbus TCP Adapter}
+\label{tab:BasissettingsModbusTCPAdapter}
+\end{table}
+
+\subsection{ConnectionParameter}
+Wird ein Objekt der Klasse \verb|ConnectionParameter| instanziiert, so dient dies als Datenhalteobjekt der Remoteaddress. Dabei wird der String vom Typ \textit{Remoteaddress} in die einzelnen Komponenten zerlegt und in für die weiter verwendeten Funktionen gültige Datentypen gewandelt. Diese Aufgabe übernimmt die Methode SplitString in Abschnitt \ref{sec:SplitString}
+
+\subsection{SplitString}
+\label{sec:SplitString}
+Die Methode \textit{SplitString} ist private und wird daher nur von Methoden der Klasse \textit{ModbusTCPAdapter} aufgerufen. Als Übergabeparameter wird ein String mit dem Format \textit{Remoteaddress} benötigt. Die Methode zerlegt die \textit{Remoteaddress} in die einzelnen Parameter und überprüft die Plausibilität der Werte. Ist ein Parameter ungültig, so wird eine Exception geworfen. Diese wird an die aufrufende Funktion weitergeleitet bis zum Aufruf der jeweiligen Methode der \textit{ModbusTCPAdapter} Klasse, welche die Methode \textit{SplitString} benötigt. Die Methode besitzt als Rückgabe ein Objekt vom Typ \textit{ConnectionParameter}.
+
+\section{Push Funktion (send)}
+\label{sec:PushFunction}
+In der Implementierung wird die Push Funktion \textit{send} genannt. Bei der Push 1:n Funktion schreibt ein Client den Wert eines Datenpunkts auf eine Anzahl von n Modbus Servern. Die Variable n muss größer gleich 1 sein. Als Übergabeparameter erhält die Methode eine Liste von \textit{Remoteaddress} und ein Objekt vom Typ \textit{DataObject}. Im Objekt \textit{DataObject} ist es erforderlich das Objekt \textit{data} mit den zu sendenden Werten zu beschreiben. Das Objekt \textit{SunSpecDataType} benötigt keinen Wert, da der Datentyp des zu schreibenden Werts von der \textit{Remoteaddress} bereitgestellt wird. Zurückgegeben wird eine Liste von \textit{Status} Objekten. Das Listing \ref{lst:Push1n} zeigt die Methode \textit{send} mit den dementsprechenden Übergabe und Rückgabeparametern.
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Push 1:n},label=lst:Push1n, xleftmargin=50pt]
+public List<Status> send(List<String> Remoteaddress, DataObject Value) throws Exception{};
+\end{lstlisting}
+
+
+Die \textit{send} Methode wird folgendermaßen abgearbeitet: Im ersten Schritt wird die Liste an \textit{Remoteaddress} Objekten überprüft. Diese muss mindestens einen Eintrag besitzen. Ist kein Eintrag vorhanden, dann wird im Rückgabeobjekt der Status \textit{KeineVerbindungsparameter} geschrieben und die Methode wird abgebrochen. Ist mindestens ein Eintrag vorhanden, so wird dieser auf Plausibilität überprüft. Ist eine \textit{Remoteaddress} nicht in Ordnung, so wird eine Exception geworfen. Diese wird an die \textit{send} Methode weitergeleitet und muss dementsprechend beim Aufruf dieser Methode weitergeleitet oder gefangen werden. Ist die Liste an \textit{Remoteaddress} Objekten gültig, dann werden die Einträge nacheinander abgearbeitet. Dazu wird zuerst ein Modbus Master Objekt erzeugt. Diesem werden die IP Adresse und der Port des Modbus Servers übergeben. Anschließend werden über Setter Methoden die Grundeinstellungen \textit{Timeout} und \textit{retries} des \textit{ModbusTCPAdapter} Objekts an das Modbus Master Objekt übergeben. Im nächsten Schritt wird eine TCP Verbindung zum Modbus Server aufgebaut. Dieser Methodenaufruf wird mit einem try/catch umgeben. Kann keine Verbindung aufgebaut werden, dann wirft die Methode eine Exception. Ist dies der Fall, wird in das Rückgabeobjekt der Methode \textit{send}, der Status \textit{ErrorVerbindungsaufbau} geschrieben und der nächste Eintrag in der Liste bearbeitet. Ist die Verbindung erfolgreich, dann wird die Methode zum Schreiben eines Wertes an einem Modbus Server aufgerufen. Dieser Methodenaufruf wird ebenfalls mit einem try/catch umgeben. Wirft die Methode eine Exception, dann wird in das Rückgabeobjekt der Methode \textit{send} der Status \textit{ErrorSenden} geschrieben. Ist der Methodenaufruf erfolgreich, dann wird der Status \textit{WertGeschrieben} in das Rückgabeobjekt geschrieben. Nach Abarbeitung der Liste wird die Liste an \textit{Status} Objekten von der Methode \textit{send} zurückgegeben.
+\clearpage
+
+\section{Request-Response Funktion (request)}
+\label{sec:RequRespFunction}
+In der Implementierung wird die Methode \textit{request} genannt. Request-Response entspricht im Prinzip schon dem Funktionscode 0x03 (Lese Holding Registers) des Modbus Protokolls. Dabei wird ein Datenpunkt in den Registern abgefragt. Abhängig vom Datentyp des Datenpunkts auch mehrere Register. Listing \ref{lst:RequestResponse} zeigt den Aufbau der Methode. Die \textit{request} Methode benötigt als Übergabeparameter nur einen String vom Aufbau \textit{Remoteaddress}. Als Rückgabewert wird ein Objekt vom Typ \textit{Result} zurückgegeben. Diese Methode kann nur einen Datenpunkt an einem Modbus Server auslesen. Für mehrere Datenpunkte muss die Methode dementsprechend oft aufgerufen werden.
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={Request-Response},label=lst:RequestResponse, xleftmargin=50pt]
+public Result request(String Remoteaddress) throws Exception {}
+\end{lstlisting}
+
+Die Request Methode wird folgendermaßen abgearbeitet: Zuerst wird die Plausibilität des \textit{Remoteaddress} Übergabeparameter geprüft. Bei erfolgreicher Prüfung wird eine TCP Verbindung zum Modbus Server aufgebaut. Bei erfolgreicher Verbindung wird der Datenpunkt, welcher durch die \textit{Remoteaddress} spezifiziert, ist vom Modbus Server gelesen. Ist dies erfolgreich, dann wird der Wert in das Objekt welches zurückgegeben wird geschrieben. Der Status des Rückgabeobjekt wird auf \textit{WertEmpfangen} gesetzt. Ist die Transaktion nicht erfolgreich, dann wird in das Rückgabeobjekt nur der Status \textit{ErrorEmpfangen} geschrieben. Anschließend wird das Objekt vom Typ \textit{Result} von der Methode zurückgegeben. 
+\clearpage
+
+\section{Publish-Subscribe Funktion (subscribe, unsubscribe)}
+\label{sec:PublishSubscribeFunction}
+Ein Modbus Server agiert nur passiv. Dieser kann keine Verbindung aktiv aufbauen und Daten an den Client senden. Somit ist es nicht möglich, Publish-Subscribe am Server zu implementieren. Um diese Funktion trotzdem zu realisieren, übernimmt diese Aufgabe der Protokolladapter durch polling. Dabei sendet der Protokolladapter Abfragen an den Modbus Server. Es wird überprüft ob in dem Register, welches am Modbus Server abonniert wurde eine Werteänderung stattgefunden hat. Bei einer Änderung wird der Subscriber benachrichtigt.
+In der Implementierung werden zwei Methoden bereitgestellt für Publish-Subscribe. Die Methode \textit{subscribe}, welche einen neuen Subscriber erstellt. Diese Methode benötigt als Übergabeparameter einen String mit den Namen des Subscribers und einen weiteren String im Format \textit{Remoteaddress}. Dies wird in Listing \ref{lst:subscribe} dargestellt. Die Methode \textit{unsubscribe} entfernt den Subscriber. Es werden wie bei der Methode \textit{subscribe} dieselben Übergabeparameter benötigt. Siehe Listing \ref{lst:unsubscribe}. Die Idee, das Observer-Pattern zu benutzen um die Publish-Subscribe Funktion zu implementieren, wurde aus \cite{Freeman} und \cite{Hohpe:2003:EIP:940308} übernommen.
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={subscribe},label=lst:subscribe, xleftmargin=50pt]
+public void subscribe(String subscriber, String Remoteaddress) throws Exception {}
+\end{lstlisting}
+
+\lstset{language=Java}
+\begin{lstlisting}[caption={unsubscribe},label=lst:unsubscribe, xleftmargin=50pt]
+public void unsubscribe(String subscriber, String Remoteaddress) throws Exception {}
+\end{lstlisting}
+
+
+\subsection{Connectivity Modul}
+Das Connectivity Modul fordert am Protokolladapter einen neuen Subscriber an. Der Subscriber muss an das Connectivty Modul rückmelden, ob sich ein Wert geändert hat. Das Connectivity Modul ist ein Enum Singleton \upshape \cite{ullenboom2016java}. In der Implementierung wird dieses \textit{ConnectivityModule} genannt. Dies ist in Listing \ref{lst:EnumConnectivityModul} dargestellt. Die Klasse \textit{ConnectivityModule} wird instanziiert, wenn ein Subscriber das erste mal die Methode \textit{receive} aufruft. In der Methode \textit{receive} muss dann programmiert werden, welches Modul im OpenNES System die Daten erhält. Die dafür notwendigen Informationen werden \textit{receive} als Parameter übergeben. 
+\newpage
+\lstset{language=Java, numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt, tabsize=2}
+\begin{lstlisting}[caption={Connectivity Modul als enum Singleton},label=lst:EnumConnectivityModul, xleftmargin=50pt]
+public enum ConnectivityModule {
+	INSTANCE;
+	public void receive(String subscriber, String remoteAddress, DataObject data){
+		//Write code here
+	}
+}
+\end{lstlisting}
+
+
+\subsection{Subscriber}
+Ein Objekt vom Typ \textit{Subscriber} ist ein Datenhalteobjekt, welches die Informationen für genau einen Subscriber enthält. Weiters wird in der \textit{Subscriber} Klasse das Interface \textit{Observer} implementiert. Im \textit{Observer} Interface sind die Getter und Setter Methoden definiert, welche in der Klasse \textit{Subscriber} implementiert werden. In einem Objekt vom Typ \textit{Subscriber} besitzen alle Variablen eine Getter Methode. Die Variablen \textit{Value} und \textit{newValue}, welche die aktuellen Werte enthalten die abonniert wurden, besitzen auch eine Setter Methode. Die übrigen Parameter des Objekts werden beim Konstruktoraufruf von \textit{Subscriber} übergeben. Während der Laufzeit können die Parameter eines Subscribers nicht geändert werden. Es muss ein neuer bzw. weitere Subscriber erzeugt werden, wenn eine Parameteränderung notwendig ist. Die Grundeinstellungen \textit{TCPport, Timeout, retries,} werden aus dem \textit{ModbusTCPAdapter} Singleton für jedes \textit{Subscriber} Objekt übernommen, siehe Tabelle \ref{tab:BasissettingsModbusTCPAdapter}.
+
+
+\subsection{Observer}
+Im \textit{Observer} Interface sind die Getter und Setter Methoden definiert, die auf die Variablen der \textit{Subscriber} Klasse zugreifen. Das \textit{Observer} Interface ist in der \textit{Subscriber} Klasse implementiert. Somit wird die \textit{Subscriber} Klasse entkoppelt, da nach der Erzeugung eines \textit{Subscriber} Objekts mit dem \textit{Observer} Objekt weitergearbeitet wird.
+
+\subsection{Grabber}
+In der \textit{Grabber} Klasse ist der Hauptteil der Publish-Subscribe Funktion des Protokolladapters realisiert. Ein Objekt vom Typ \textit{Grabber} wird bei der Instanziierung der Klasse \textit{ModbusTCPAdapter} erzeugt. Das Interface \textit{Runnable} ist in der Klasse \textit{Grabber} implementiert. Dadurch kann das \textit{Grabber} Objekt bei der Instanziierung von \textit{ModbusTCPAdapter} in einem eigenen Thread gestartet werden.
+Zwei wichtige Methoden der \textit{Grabber} Klasse sind \textit{register} und \textit{unregister}.\\
+Die Methode \textit{register} benötigt als Übergabeparameter ein Objekt vom Typ \textit{Observer}. Da das \textit{Observer} Interface in der Klasse \textit{Subscriber} implementiert worden ist, ist es möglich, über diese auf ein \textit{Subscriber} Objekt zu referenzieren. Die \textit{Grabber} Klasse besitzt eine Liste von \textit{Observer} Objekten. Wird die Methode \textit{register} aufgerufen, so fügt diese ein \textit{Observer} Objekt der Liste hinzu. Ein neuer Subscriber ist hinzugefügt.\\ 
+Der Methode \textit{unregister} wird als Übergabeparameter der String im Format \textit{RemoteAddress} und ein String mit dem Namen des Subscribers übergeben. Die Methode durchsucht die Liste von \textit{Observer} Objekten. Wird ein Element in der Liste gefunden, bei dem beide Parameter mit den Übergabeparametern übereinstimmen dann wird dieses aus der Liste entfernt. Auf das \textit{Observer} Objekt verweist nun keine Referenz mehr.\newline
+Folgender Abschnitt beschreibt die Funktionen in der Methode \textit{run} der \textit{Grabber} Klasse. Diese sind alle in der Endlosschleife while(true){} enthalten. Im ersten Schritt wird überprüft, ob in der \textit{Observer} bzw. Subscriber Liste mehrfach dieselben Einträge vorhanden sind. Ein Subscriber ist durch den Namen und die \textit{Remoteaddress} definiert. Die \textit{Remoteaddress} reicht aus, um einen abonnierten Datenpunkt  eindeutig zu definieren. Da dem Subscriber auch ein Name vergeben wird, können mehrere Subscriber mit unterschiedlichen Namen denselben Datenpunkt abonnieren. Es wird daher aus der Liste von \textit{Observer} Objekten eine Liste erzeugt, in der jede \textit{Remoteaddress} nur einmal vorkommt.\\ 
+Da die Publish-Subscribe Funktion durch polling realisiert ist, kann durch die Liste mit einzigartigen \textit{Remoteaddress} Elementen, sofern es Subscriber gibt, welche dieselbe \textit{Remoteaddress} besitzen, die Anzahl der Abfragen an einen Server reduziert werden. Im nächsten Schritt wird der Wert von allen Modbus Servern abgefragt. Die Liste von Remoteaddress Elementen wird sequenziell abgearbeitet. Das Abfragen der Werte funktioniert gleich wie bei Request-Response. Deshalb sei hier auf das Kapitel \ref{sec:RequRespFunction} verwiesen. Der empfangene Wert wird in die Variable \textit{newValue} bei allen \textit{Observer} Objekten, die die \textit{Remoteaddress} besitzen geschrieben. Nachdem die \textit{Remoteaddress} Liste abgearbeitet ist, wird durch die Liste von \textit{Observer} Objekten iteriert. Dabei werden die Variablen \textit{value} und \textit{newValue} verglichen. Sind die Werte unterschiedlich, wird die Methode \textit{receive} des Singleton \textit{ConnectivityModule} aufgerufen. Anschließend wird der Wert der Variable \textit{newValue} in die Variable \textit{value} geschrieben.\\ 
+Nach Abarbeitung der \textit{Observer} Liste wird der Thread für eine Zeit pausiert. Diese Zeit ist in der Variable \textit{refresh} des \textit{ModbusTCPAdapter} Singleton vorgegeben. Über die Setter Methode \textit{setRefresh} kann diese geändert werden, siehe Tabelle \ref{tab:BasissettingsModbusTCPAdapter}. 

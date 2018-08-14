@@ -1,0 +1,36 @@
+\chapter{Einleitung}\label{chap:Einleitung}
+\thispagestyle{standard}
+\pagestyle{standard}
+\renewcommand{\footrulewidth}{0.4pt}
+\lfoot{\small Refik Kerimi}
+
+Durch die Markteinführung des \acl{SP} hat sich in unserem Leben einiges geändert. Nicht nur unsere Kommunikation wurde dadurch verändert sondern auch unser Leben im allgemeinen, ist durch dieses kleine Wundergerät verändert worden.
+Wir haben fast ständig das \acs{SP} im Einsatz um zu organisieren, spielen, Musik hören, Kontakte pflegen und ab und zu wird es auch zum telefonieren verwendet.
+Das \acl{SP} hat nicht nur unser Leben verändert sondern auch das Internet und die Entwicklung von Webapplikationen. Kurz nach der Erfindung des smarten Handys kam ein weiterer Markt hinzu der sich parallel dazu entwickelt hat und es wurden neue Berufe gegründet wie der NativeApp Entwickler.
+
+
+
+\section{Motivation} \label{sub:Motivation}
+
+
+Die zunehmende Anzahl an dezentralen Stromerzeugungssystemen (engl. \acl{DER}, \acs{DER}) führt zu einem Umdenken bei der Planung und beim Betrieb von elektrischen Anlagen. Intelligente Stromnetze (engl. Smart Grids) sollen den Wandel von einem klassischen Verteilernetz, mit wenigen zentralen Großerzeugern, zu einem Netz mit vielen dezentralen Erzeugern ermöglichen und dadurch zu einer effizienteren Nutzung der Stromnetzinfrastruktur beitragen \cite{DERs, SmartGrids}.\\
+Zurzeit besteht noch kein einheitliches System zur Integration von \acs {DER} Steuerungen in dem Smart Grid Bereich, da die Skalierbarkeit und Offenheit in den benötigten Automatisierungssystemen fehlt.
+Ein weiteres Problem stellen die vielen unterschiedlichen Kommunikationsprotokolle dar.
+Um Automatisierungs- und Steuerungsaufgaben in Smart Grids einfach und wiederverwendbar einzugliedern wird von \acl{AIT} (\acs{AIT}), FH Salzburg und Fronius International GmbH OpenNES entwickelt.
+OpenNES soll eine Informations- und Automatisierungslösung schaffen, die offen, generisch und interoperabel zur vorhandenen Infrastruktur ist und zusätzlich den aktuellen Qualitätsanforderungen hinsichtlich entspricht.
+
+
+\newpage
+\section{Zielsetzung}\label{sub:Zielsetzung}
+Das Ziel dieser Arbeit ist es, einen \acl{PA} für die Kommunikation zwischen OpenNES fähigen
+\ac{IED}s und \ac{SED}s, welche via Modbus/SunSpec kommunizieren, zu entwickeln und diesen in das Connectivity Modul zu integrieren.
+Mit Hilfe des \acl{PA}s soll ein einheitliches, flexibles System zur Integration von bestehenden Standards (z.B.: IEC 61850, ModBus,...) in OpenNES geschaffen werden.
+Weiterführend soll erreicht werden, dass durch die Verwendung von offenen und generischen Systemen, wie OpenNES, die Netzbetreiber eine gezielte und aktive Unterstützung bekommen um Systeme und den Stromfluss großflächig zu beeinflussen.
+
+
+
+
+
+
+
+

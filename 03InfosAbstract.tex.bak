@@ -1,0 +1,41 @@
+\chapter*{Allgemeine Informationen}
+\thispagestyle{plain}
+\pagestyle{plain}
+\renewcommand{\footrulewidth}{0.4pt}
+\lfoot{\small Refik Kerimi}
+
+\begin{tabular}{p{0.3\textwidth}p{0.65\textwidth}}
+
+Vor- und Zuname: & \Author \\*[0.2cm]
+Institution: & Fachhochschule Salzburg GmbH \\*[0.2cm]
+Studiengang: & Informationstechnik \& System-Management \\*[0.2cm]
+Titel der Masterarbeit: & \Title \\*[0.2cm]
+Schlagwörter: & \Keywords  \\*[0.2cm]
+Betreuer an der FH: & \Advisor
+
+\end{tabular}
+
+\newpage
+
+\section*{\Large\bfseries Kurzfassung}
+Die steigende Anzahl von mobilen Geräten erfordert ein Umdenken in der Art der Applikationsentwicklung. 
+
+
+
+
+Die steigenden Anforderungen an moderne Energiesysteme setzen eine Weiterentwicklung der Kommunikations- und Informationsinfrastruktur voraus. Das Ziel ist es, erneuerbare Energiequellen einfacher und effizienter in bestehende Netze zu integrieren.
+Das Projekt OpenNES, welches gemeinsam vom \ac{AIT}, der FH Salzburg und der Fronius International GmbH entwickelt wird, soll eine offene, generische und interoperabe Informations- und Automatisierungslösung schaffen, die dies ermöglicht.
+OpenNES stellt fern-programmierbare Funktionen, geeignete Modellierungsmethoden für Energiequellen und eine Infrastruktur zur Schaffung der Kommunikation bereit.
+Zur Implementierung von nicht OpenNES fähigen Geräten in Smart Grids werden mehrere Protokolladapter benötigt. Diese befinden sich im Connectivity Modul, welches die Schnittstelle zur Kommunikation nach außen darstellt. 
+In dieser Bachelorarbeit wird der Protokolladapter für Modbus/SunSpec entwickelt.
+OpenNES soll dazu beitragen, dass die geforderten Ziele und Richtlinien der EU für Klimaschutz und Energie in Zukunft erreicht werden können.
+
+
+\section*{\Large\bfseries Abstract}
+
+Increasing requirements on modern energy systems require  further development of  communication and information infrastructure. The aim is to integrate renewable energy sources more easily and efficiently into existing networks. 
+To ensure this, the project OpenNES, which is beeing developed jointly by the Austrian Intitute of Technology (ATI), the FH Salzburg and Fronius International GmbH, shall  create an open, generic and interoperable information and automation solution. 
+OpenNES provides remote programmable features, appropriate modelling methods for energy sources, and an infrastructure to provide communication. 
+Several protocol adapters are required to implement non-OpenNES-enabled devices in SmartGrids. These are located within the Connectivity Module, an interface for communication to the outside. 
+In this bachelor thesis, the protocol adapter for Modbus/SunSpec is developed. 
+OpenNES is intended to help achieve the EU's objectives and directives for climate protection and energy in the near future. 

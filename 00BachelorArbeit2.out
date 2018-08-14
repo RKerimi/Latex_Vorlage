@@ -1,0 +1,43 @@
+\BOOKMARK [0][-]{chapter*.5}{Abk\374rzungsverzeichnis}{}% 1
+\BOOKMARK [0][-]{chapter*.6}{Abbildungsverzeichnis}{}% 2
+\BOOKMARK [0][-]{chapter*.7}{Tabellenverzeichnis}{}% 3
+\BOOKMARK [0][-]{chapter*.8}{Listingverzeichnis}{}% 4
+\BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 5
+\BOOKMARK [1][-]{section.1.1}{Motivation}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.2}{Zielsetzung}{chapter.1}% 7
+\BOOKMARK [0][-]{chapter.2}{Grundlagen}{}% 8
+\BOOKMARK [1][-]{section.2.1}{Geschichte Softwareentwicklung}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.2}{Native Apps}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Web Applikationen}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.4}{Hybrid Applikationen}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.5}{Progressive Webapplikationen}{chapter.2}% 13
+\BOOKMARK [0][-]{chapter.3}{Features und Merkmale}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Aufbau Progressive Web Apps \(PWA\)}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.2}{Unterschiede PWA, Native Applikation und Web-Apps}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.3}{Web App Manifest}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.4}{Add to Homescreen}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.5}{Service Worker}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.6}{Push Notifikation}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.7}{Geolocation API}{chapter.3}% 21
+\BOOKMARK [0][-]{chapter.4}{Implementierung}{}% 22
+\BOOKMARK [1][-]{section.4.1}{Anforderungsanalyse}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.2}{Umsetzung der Anforderungen}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.3}{Ausgew\344hlte Programmiersprache und IDE}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.4}{Ordnerstruktur}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.5}{Manifest}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.6}{Add to Homescreen}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.7}{Service Worker und Cache API}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.8}{Offline Modus}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.9}{Push Notifications}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.10}{Geolocation API}{chapter.4}% 32
+\BOOKMARK [0][-]{chapter.5}{Funktionstest/Validierung}{}% 33
+\BOOKMARK [1][-]{section.5.1}{Ausgangsbedingung und Ausgrenzung}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.2}{Testen auf Mobilen Ger\344ten und Android Studio Emulator}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.3}{Lighthouse}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.4}{Add to Homescreen}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.5}{Service Worker}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.6}{Push Notifikation}{chapter.5}% 39
+\BOOKMARK [1][-]{section.5.7}{Geolocation}{chapter.5}% 40
+\BOOKMARK [1][-]{section.5.8}{Vergleich mit Native App}{chapter.5}% 41
+\BOOKMARK [0][-]{chapter.6}{Zusammenfassung und Ausblick}{}% 42
+\BOOKMARK [0][-]{chapter.6}{Literatur}{}% 43

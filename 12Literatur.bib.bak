@@ -1,0 +1,156 @@
+% Encoding: UTF-8
+
+@Misc{PWA,
+  author       = {{Google Developers}},
+  title        = {{Progressive Web Apps}},
+  howpublished = {\url{https://developers.google.com/web/progressive-web-apps/} (28.06.2018)},
+}
+
+@InProceedings{Softwarehistoryunderthelens,
+  author    = {M. Codoban and S. S. Ragavan and D. Dig and B. Bailey},
+  title     = {Software history under the lens: A study on why and how developers examine it},
+  booktitle = {2015 IEEE International Conference on Software Maintenance and Evolution (ICSME)},
+  year      = {2015},
+  pages     = {1-10},
+  month     = {Sept},
+  doi       = {10.1109/ICSM.2015.7332446},
+  keywords  = {human factors;software houses;software management;software change management;software history;software industry;Context;Encoding;History;Industries;Interviews;Lenses;Software;human aspects of software evolution;software change management;software history;user studies},
+}
+
+@Article{25YearsofSoftwareHistory,
+  author   = {-},
+  title    = {The Big Bang: 25 Years of Software History},
+  journal  = {IEEE Software},
+  year     = {2008},
+  volume   = {25},
+  number   = {6},
+  pages    = {6-14},
+  month    = {Nov},
+  issn     = {0740-7459},
+  doi      = {10.1109/MS.2008.164},
+  keywords = {Computer industry;Computer networks;Domain Name System;History;Internet;Jacobian matrices;Production;Programming profession;Software engineering;Voting;software history;software milestones;time line},
+}
+
+@Article{WhatMakestheHistoryofSoftwareHard,
+  author   = {M. S. Mahoney},
+  title    = {What Makes the History of Software Hard},
+  journal  = {IEEE Annals of the History of Computing},
+  year     = {2008},
+  volume   = {30},
+  number   = {3},
+  pages    = {8-18},
+  month    = {July},
+  issn     = {1058-6180},
+  doi      = {10.1109/MAHC.2008.55},
+  keywords = {computer software;history;computational models;historical experience;software history;Biomedical informatics;Computational modeling;History;Humans;Microcomputers;Optical computing;Permission;Photonic integrated circuits;Shape;Software tools},
+}
+
+@Article{TheHistoryoftheHistoryofSoftware,
+  author   = {M. Campbell-Kelly},
+  title    = {The History of the History of Software},
+  journal  = {IEEE Annals of the History of Computing},
+  year     = {2007},
+  volume   = {29},
+  number   = {4},
+  pages    = {40-51},
+  month    = {Oct},
+  issn     = {1058-6180},
+  doi      = {10.1109/MAHC.2007.4407444},
+  keywords = {DP industry;history;hardware development;software development;software history;software industry;software professions;Application software;Computer industry;Educational institutions;Hardware;History;Laboratories;Physics computing;Power generation economics;Programming profession;Technology transfer;computers and society;computing milieux;history of computing;history of software},
+}
+
+@Misc{Geraetenutzung,
+  author       = {{Mindshare}},
+  title        = {{Über welche der folgenden Geräte nutzen Sie das Internet?}},
+  howpublished = {\url{https://de-statista-com.ezproxy.fh-salzburg.ac.at/statistik/daten/studie/742449/umfrage/umfrage-zur-internetnutzung-nach-geraetetyp-in-oesterreich-nach-alter/} (2018)},
+}
+
+@Book{WasistSoftware,
+  title     = {Lehrbuch der Softwaretechnik: Softwaremanagement},
+  publisher = {Springer Spektrum},
+  year      = {2008},
+  author    = {Balzert, Helmut},
+  address   = {Heidelberg, Neckar},
+  edition   = {2., Aufl.},
+  isbn      = {978-3-8274-1705-3},
+  interhash = {c25f0a2b873cdb0e02032ad579e5bc29},
+  intrahash = {030a63590fe5f5b21193e1f1ec354602},
+  keywords  = {UBMA},
+  pages     = {17 - 18},
+  timestamp = {2009-09-29T14:55:28.000+0200},
+}
+
+@INPROCEEDINGS{PWAvsNative, 
+author={D. Fortunato and J. Bernardino}, 
+booktitle={2018 13th Iberian Conference on Information Systems and Technologies (CISTI)}, 
+title={Progressive web apps: An alternative to the native mobile Apps}, 
+year={2018}, 
+volume={}, 
+number={}, 
+pages={1-6}, 
+keywords={Androids;Browsers;Global Positioning System;Google;Humanoid robots;Internet;Smart phones;Android;Mobile Native Apps;Progressive Web Apps;Web Apps;Windows;iOS}, 
+doi={10.23919/CISTI.2018.8399228}, 
+ISSN={}, 
+month={June},}
+
+@Misc{NativeAppHistory,
+  author       = {{Mindshare}},
+  title        = {{Software - Geschichte der Software}},
+  howpublished = {\url{http://www.wave3software.com/} (2018)},
+}
+
+@Misc{Microsoft,
+  author       = {{Microsoft Corporation}},
+  title        = {{Microsoft Fast Facts}},
+  howpublished = {\url{https://news.microsoft.com/de-de/fast-facts/} (2018)},
+}
+
+@Misc{SAP,
+  author       = {{SAP SE}},
+  title        = {{SAP: 46 Jahre Innovation}},
+  howpublished = {\url{https://www.sap.com/corporate/de/company/history.html} (2018)},
+}
+
+@Misc{NativeApp,
+  author       = {{App Entwickler Verzeichnis}},
+  title        = {{Native Apps vs. Web Apps - Unterschiede und Vorteile}},
+  howpublished = {\url{https://app-entwickler-verzeichnis.de/faq-app-entwicklung/11-definitionen/586-unterschiede-und-vergleich-native-apps-vs-web-apps-2} (2018)},
+}
+
+@Misc{Hochsprachen,
+  author       = {{Margaret Rouse, Alexander Gillis}},
+  title        = {{DEFINITION native App}},
+  howpublished = {\url{https://searchsoftwarequality.techtarget.com/definition/native-application-native-app} (2013)},
+}
+
+@Misc{WebApps,
+  author       = {{ Stephan Augsten}},
+  title        = {{Defintion „Webanwendung“ Was ist eine Web App?}},
+  howpublished = {\url{https://www.dev-insider.de/was-ist-eine-web-app-a-596814/} (20.04.2017)},
+}
+
+@Misc{WebAppsVsHybridApps,
+  author       = {{ Admin}},
+  title        = {{Progressive Web vs Hybrid vs Native Apps: What Are They and Which Should I Choose?}},
+  howpublished = {{\urlhttp://igniva.digital/progressive-web-hybrid-native-apps/} (20.04.2017)},
+}
+
+@Misc{HybridApps,
+  author       = {{Beratung FLYACTS}},
+  title        = {{Hybrid-Apps – Definition, Eigenschaften, Einsatzorte, Vorteile und Beispiele}},
+  howpublished = {{https://www.flyacts.com/hybrid-apps-definition-eigenschaften-einsatzorte-vorteile-und-beispiele} (03.12.2013)},
+}
+
+@Misc{CSS,
+  author       = {{Anton Shaleynikov}},
+  title        = {{Top 5 Most Popular CSS Frameworks that You Should Pay Attention to in 2017}},
+  howpublished = {\url{https://hackernoon.com/top-5-most-popular-css-frameworks-that-you-should-pay-attention-to-in-2017-344a8b67fba1} (2018)},
+}
+
+@Misc{PWAAdjectives,
+  author       = {{Google Developers}},
+  title        = {{Your First Progressive Web App}},
+  howpublished = {\url{https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html#0} (2018)},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

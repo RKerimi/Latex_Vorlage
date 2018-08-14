@@ -1,0 +1,44 @@
+\babel@toc {ngerman}{}
+\contentsline {chapter}{Abk\IeC {\"u}rzungsverzeichnis}{i}{chapter*.5}
+\contentsline {chapter}{Abbildungsverzeichnis}{ii}{chapter*.6}
+\contentsline {chapter}{Tabellenverzeichnis}{iii}{chapter*.7}
+\contentsline {chapter}{Listingverzeichnis}{iv}{chapter*.8}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Zielsetzung}{2}{section.1.2}
+\contentsline {chapter}{\numberline {2}Grundlagen}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Geschichte Softwareentwicklung}{4}{section.2.1}
+\contentsline {section}{\numberline {2.2}Native Apps}{4}{section.2.2}
+\contentsline {section}{\numberline {2.3}Web Applikationen}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}Hybrid Applikationen}{4}{section.2.4}
+\contentsline {section}{\numberline {2.5}Progressive Webapplikationen}{5}{section.2.5}
+\contentsline {chapter}{\numberline {3}Features und Merkmale}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Aufbau Progressive Web Apps (PWA)}{6}{section.3.1}
+\contentsline {section}{\numberline {3.2}Unterschiede PWA, Native Applikation und Web-Apps}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}Web App Manifest}{8}{section.3.3}
+\contentsline {section}{\numberline {3.4}Add to Homescreen}{9}{section.3.4}
+\contentsline {section}{\numberline {3.5}Service Worker}{11}{section.3.5}
+\contentsline {section}{\numberline {3.6}Push Notifikation}{14}{section.3.6}
+\contentsline {section}{\numberline {3.7}Geolocation API}{16}{section.3.7}
+\contentsline {chapter}{\numberline {4}Implementierung}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}Anforderungsanalyse}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Umsetzung der Anforderungen}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}Ausgew\IeC {\"a}hlte Programmiersprache und IDE}{17}{section.4.3}
+\contentsline {section}{\numberline {4.4}Ordnerstruktur}{18}{section.4.4}
+\contentsline {section}{\numberline {4.5}Manifest}{18}{section.4.5}
+\contentsline {section}{\numberline {4.6}Add to Homescreen}{20}{section.4.6}
+\contentsline {section}{\numberline {4.7}Service Worker und Cache API}{20}{section.4.7}
+\contentsline {section}{\numberline {4.8}Offline Modus}{23}{section.4.8}
+\contentsline {section}{\numberline {4.9}Push Notifications}{25}{section.4.9}
+\contentsline {section}{\numberline {4.10}Geolocation API}{26}{section.4.10}
+\contentsline {chapter}{\numberline {5}Funktionstest/Validierung}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}Ausgangsbedingung und Ausgrenzung}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Testen auf Mobilen Ger\IeC {\"a}ten und Android Studio Emulator}{27}{section.5.2}
+\contentsline {section}{\numberline {5.3}Lighthouse}{28}{section.5.3}
+\contentsline {section}{\numberline {5.4}Add to Homescreen}{30}{section.5.4}
+\contentsline {section}{\numberline {5.5}Service Worker}{31}{section.5.5}
+\contentsline {section}{\numberline {5.6}Push Notifikation}{32}{section.5.6}
+\contentsline {section}{\numberline {5.7}Geolocation}{33}{section.5.7}
+\contentsline {section}{\numberline {5.8}Vergleich mit Native App}{34}{section.5.8}
+\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{35}{chapter.6}
+\contentsline {chapter}{Literatur}{36}{chapter.6}

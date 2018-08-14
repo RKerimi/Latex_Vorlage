@@ -1,0 +1,105 @@
+\documentclass
+[
+a4paper,
+german,
+openright,                    % Kap.beginn immer rechts! (fkt. nur bei report, nicht bei article)
+12pt                          % ersatzweise 12pt, wenn mehr Seiten entstehen sollen
+]
+{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Dokumenteneigenschaften
+
+\newcommand{\Author}{Refik Kerimi} 
+\newcommand{\Title}{Analyse der Auswirkung von Progressive Web Apps auf bestehende Web Apps}
+\newcommand{\Keywords}{Progressive Web App, Manifest.json, Service Workers, Home Banner, Offline}
+\newcommand{\Advisor}{DI Norbert Egger BSc}
+\newcommand{\Birthdate}{28.03.1983}
+\newcommand{\EnrolNum}{1410555043}
+\newcommand{\VenueMonthYear}{Salzburg, September 2018}
+\newcommand{\VenueDate}{Salzburg, am 1.09.2018}
+
+\newcommand{\frontmatter}{\cleardoublepage\pagenumbering{roman}}
+
+\newcommand{\mainmatter}{\cleardoublepage\pagenumbering{arabic}\setcounter{page}{1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Layout zusammengestellt von Richard Wanger im WS 2015/2016. Verschiedene Vorlagen wurden bei der Erstellung
+% kombiniert und nach dem Masterleitfaden (Stand: Oktober 2015) adaptiert. Verwendung ohne Gewähr!
+% Umbau des Layouts nach dem Bachelorleitfaden (Stand: Juni 2018) durch Refik Kerimi SS 2018 
+
+\usepackage{style}		%alle packages und Formatvorlagen befinden sich in dieser Datei
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ORGANISATORISCHES
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+
+\begin{document}
+
+\include{01Titelblatt}
+\include{02EidesstattlicheErklaerung}
+\include{03InfosAbstract}
+\include{04Danksagung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%VERZEICHNISSE
+
+\tableofcontents
+%\protect\addcontentsline {toc}{chapter} {Inhaltsverzeichnis}
+
+\frontmatter
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\include{05Abkuerzungsverzeichnis} 
+
+\listoffigures
+\protect \addcontentsline {toc}{chapter}{Abbildungsverzeichnis}
+
+\listoftables
+\protect \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+
+\lstlistoflistings
+\protect \addcontentsline{toc}{chapter}{Listingverzeichnis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%INHALT
+
+\mainmatter
+\include{11Einleitung}
+\include{11Grundlagen}
+\include{11BasisTechnologien}
+%\include{11ProgressiveWebApp}
+\include{11Implementierung}
+\include{11Test}
+\include{11Fazit}
+%\include{11Samples}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LITERATURVERZEICHNIS
+
+\interlinepenalty = 10000 % Literatureinträge: Absätze zusammenhalten
+\clearpage
+\addcontentsline{toc}{chapter}{Literatur}
+\singlespace
+\raggedright
+\bibliography{12Literatur}
+\interlinepenalty = 100
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ANHÄNGE
+
+\begin{appendix}
+%\include{Anhang_Mathematik}                 % A
+%\include{Anhang_FormatDerParameterdateien}  % B
+%\include{Anhang_Quelltexte}                 % C
+%\include{Anhang_Datenblaetter}              % D
+%\include{Anhang_Glossar}                    % E
+\end{appendix}
+
+\end{document}

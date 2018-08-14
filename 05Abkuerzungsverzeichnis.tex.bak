@@ -1,0 +1,12 @@
+\chapter*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} 
+\pagestyle{plain}
+
+\begin{acronym}[AUTOSAR]
+
+ \acro {PWA}  			{Progressive Web Aplication}
+ \acro {ADU} 				{Application Data Unit}
+ \acro {AGF} 				{Advanced Grid Features}
+ \acro {API} 				{Application Programming Interface}
+ \acro {SP} 				{Smart Phone}
+\end{acronym}

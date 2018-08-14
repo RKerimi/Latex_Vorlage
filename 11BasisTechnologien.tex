@@ -1,0 +1,111 @@
+\chapter{Features und Merkmale}\label{chab:FeaturesundMerkmale}
+\thispagestyle{standard}
+\pagestyle{standard}
+\renewcommand{\footrulewidth}{0.4pt}
+\lfoot{\small Refik Kerimi}
+In diesem Kapitel werden die Komponenten der \acl{PWA} (\acs{PWA}) erklärt. Weiters werden durch die folgenden Tabellen die wichtigsten Punkte zwischen den verschiedenen Technologien  gegenübergestellt.
+
+\section{Aufbau Progressive Web Apps (PWA)}
+Die \acs{PWA}s sind keine neuen Technologien, vielmehr sind es verbesserte Stategien, Methoden und APIs wie in Abbildung \ref{fig:Komponenten} zu sehen. 
+Sie erleichtern dem User die Benutzung und den Zugriff einer \acs{Web-App} \cite{AlternativePWA}. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=14cm]{BilderAllgemein/PWA_Features}\medskip
+	\caption{PWA Komponenten}
+	\label{fig:Komponenten}
+\end{figure}
+
+\section{Unterschiede PWA, Native Applikation und Web-Apps}\label{chap:UnterschiedePWA,NativeApplikationundWeb-Apps}
+In den folgenden Tabellen \ref{tab:PwaNvaWaInstallation}, \ref{tab:PwaNvaWaZugriff} und \ref{tab:PwaNvaWaFunktionen}  wird versucht die Features und Merkmale gegenüberzustellen um die Auswahl zu erleichtern. Die Unterschiede in den Punkten Veröffentlichung, Installation, Zugriff und Funktionen werden verglichen.
+
+%Folgende Punkte werden verglichen:
+%\begin{itemize}
+%    \item  \textbf{Veröffentlichung und Installation}
+%	\item  \textbf{Zugriff}
+%	\item  \textbf{Funktionen}
+%\end{itemize}. 
+
+\begin{table}[h]
+\centering
+
+\begin{tabular} {|p{3cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline\multirow{3}{*}
+ 										&PWA  & Native & Web App	\\ \hline
+Veröffentlichung & Es werden verschiedene Entwicklerkonten benötigt Play Store und Apple Store & keine Entwicklerkonten benötigt & keine Entwicklerkonten benötigt\\ \hline
+
+Installation & App muss aus einem der App-Stores downgeloaded werden  & Wird mit einem Klick auf dem Startbildschirm hinzugefügt & keine Funktion\\ \hline
+
+Updates &  über App-Store & Serverseitig & Serverseitig\\ \hline
+   				  						 
+				
+\end{tabular}    
+\caption{Veröffentlichung und Installation \cite{PwaNvaWa}}
+\label{tab:PwaNvaWaInstallation}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+
+\begin{tabular} {|p{3cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline\multirow{3}{*}
+ 										&PWA  & Native & Web App	\\ \hline
+Offline-Zugriff & Verfügbar & Man muss die App einmal online nutzen, dann sollten die Inhalte im Cache offline verfügbar sein. & nicht möglich\\ \hline
+
+Starten im Vollbildmodus & Verfügbar  & Verfügbar & nicht möglich\\ \hline
+
+Kundenbindung &  sehr hoch, Kunden verbringen viel Zeit & App ist wie ein Tap, das macht es für den Kunden leichter zu wechseln & wie \acs{PWA}\\ \hline
+
+
+				  						 
+				
+\end{tabular}    
+\caption{Zugriff \cite{PwaNvaWa}}
+\label{tab:PwaNvaWaZugriff}
+\end{table}
+
+
+
+
+
+Wie in den Tabellen ersichtlich bietet die \acs{PWA} eine Reihe von Vorteilen, z.B. Push Notifikations und Offline-Zugriff, die bei der Benutzung behilflich sein können. Aufgrund dessen bietet sie eine gute Alternative zu den Native App. Probleme machen die Betriebssysteme, da nicht alle Funktionen auf den verschiedenen Systemen zur Verfügung stehen \cite{PwaNvaWa}.
+In den nächsten Kapiteln werden die Methoden und APIs in der Theorie und im Kapitel \ref{chap:Implementierung} die praktische Anwendung an einer selbst erstellten App erklärt. 
+
+\section{Web App Manifest}\label{sub:Manifest}
+Das App Manifest ist eine JSON Datei die dem Browser verrät, wie sich die \acs{Web-App} bei der Installation auf dem Startbildschirm verhält. Im Manifest werden der Name, der Kurzname, die Größe, das Aussehen der Icons und weitere Eigenschaften definiert. Dessen Zweck ist es der Anwendung auf dem Startbildschirm ihr Aussehen zu verleihen. 
+Das App Manifest.json Datei wird in die gleiche Ebene wie die Index.html Datei in das Projekt eingepflegt und über den folgenden Link-Tag im Header implementiert: 
+
+\begin{lstlisting}[language=HTML, caption={Manifest.json} {\cite{Manifest}},label=lst:Manifest.json, xleftmargin=50pt]
+<link rel="manifest" href="/<Dateinname>">
+\end{lstlisting}
+
+Bei Anwendungen mit mehreren \acs{HTML}-Seiten muss der Link-Tag auf jeder Seite eingefügt werden. 
+Im Listening \ref{lst:Manifest.jsonBsp} ist ein Auszug vom Aufbau dargestellt:
+	\begin{lstlisting}[language=json, firstnumber=1, caption={Manifest in das Projekt implementieren} {\cite{Manifest}},label=lst:Manifest.jsonBsp, xleftmargin=50pt]
+  "name":"PWA Smart Home RMJ",
+  "short_name":"PWA_SHL_RMJ",
+  "start_url":"./",
+  "scope":".",
+  "display":"standalone",
+  "background_color":"#003399",
+  "theme_color":"#3F51C5",
+  "icons":[
+    {
+      "src":"./static/img/light48.png",
+      "type":"image/png",
+      "sizes":"48x48"
+    }
+  ]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
